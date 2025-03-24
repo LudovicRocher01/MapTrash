@@ -19,6 +19,8 @@ struct ContentView: View {
         )
     )
 
+    @State private var selectedContainer: Container? // 🔹 Conteneur sélectionné
+
     var filteredContainers: [Container] {
         containerLoader.containers.filter { containerLoader.selectedTypes.contains($0.type) }
     }
@@ -30,10 +32,14 @@ struct ContentView: View {
 
                 ForEach(filteredContainers) { container in
                     Annotation("", coordinate: container.coordinate) {
-                        Circle()
-                            .fill(container.getColor())
-                            .frame(width: 14, height: 14)
-                            .overlay(Circle().stroke(Color.black.opacity(0.5), lineWidth: 1))
+                        Button(action: {
+                            selectedContainer = container
+                        }) {
+                            Circle()
+                                .fill(container.getColor())
+                                .frame(width: 14, height: 14)
+                                .overlay(Circle().stroke(Color.black.opacity(0.5), lineWidth: 1))
+                        }
                     }
                 }
             }
@@ -64,6 +70,57 @@ struct ContentView: View {
                     .padding(.trailing, 20)
                 }
                 Spacer()
+
+                // 🔹 Affichage des détails du conteneur sélectionné
+                if let container = selectedContainer {
+                    VStack(spacing: 12) {
+                        HStack {
+                            Text("Conteneur")
+                                .font(.title3).bold()
+                            Spacer()
+                            Button(action: {
+                                selectedContainer = nil
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.gray)
+                                    .font(.title2)
+                            }
+                        }
+
+                        Divider()
+
+                        HStack {
+                            Label(container.type.capitalized, systemImage: "trash.fill")
+                                .font(.subheadline)
+                                .foregroundColor(container.getColor())
+                            Spacer()
+                        }
+
+                        Button(action: {
+                            openMaps(from: locationManager.userLocation, to: container.coordinate)
+                        }) {
+                            HStack {
+                                Image(systemName: "location.fill")
+                                Text("Y aller")
+                                    .fontWeight(.semibold)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                    }
+                    .transition(.opacity)
+                    .animation(.easeInOut, value: selectedContainer?.id)
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(20)
+                    .shadow(radius: 10)
+                    .padding(.horizontal)
+                    .padding(.bottom, 25)
+                }
+
 
                 VStack(spacing: 10) {
                     Text("Filtres des conteneurs")
@@ -96,6 +153,22 @@ struct ContentView: View {
         }
     }
 }
+
+func openMaps(from userLocation: CLLocationCoordinate2D?, to destination: CLLocationCoordinate2D) {
+    guard let userLocation = userLocation else { return }
+
+    // ✅ Ouvre Google Maps directement si l'app est disponible
+    if let url = URL(string: "comgooglemaps://?saddr=\(userLocation.latitude),\(userLocation.longitude)&daddr=\(destination.latitude),\(destination.longitude)&directionsmode=walking"),
+       UIApplication.shared.canOpenURL(url) {
+        UIApplication.shared.open(url)
+    } else {
+        // 🔁 Fallback vers Google Maps sur le navigateur
+        if let webURL = URL(string: "https://www.google.com/maps/dir/?api=1&origin=\(userLocation.latitude),\(userLocation.longitude)&destination=\(destination.latitude),\(destination.longitude)&travelmode=walking") {
+            UIApplication.shared.open(webURL)
+        }
+    }
+}
+
 
 // 📌 Boutons de filtre mis à jour
 struct FilterButton: View {

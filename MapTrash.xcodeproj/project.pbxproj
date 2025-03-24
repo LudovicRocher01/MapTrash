@@ -10,9 +10,22 @@
 		8A89BFC42D89C6D1000F445E /* MapTrash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTrash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8AF003272D90E18100843CD0 /* Exceptions for "MapTrash" folder in "MapTrash" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8A89BFC32D89C6D1000F445E /* MapTrash */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8A89BFC62D89C6D1000F445E /* MapTrash */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8AF003272D90E18100843CD0 /* Exceptions for "MapTrash" folder in "MapTrash" target */,
+			);
 			path = MapTrash;
 			sourceTree = "<group>";
 		};
@@ -255,7 +268,8 @@
 				DEVELOPMENT_TEAM = 96WJWVZ5ZV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette application a besoin de votre position pour chercher et afficher les points de recyclage autour de vous";
+				INFOPLIST_FILE = MapTrash/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette application a besoin de votre position pour afficher les points de recyclage autour de vous.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -285,7 +299,8 @@
 				DEVELOPMENT_TEAM = 96WJWVZ5ZV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette application a besoin de votre position pour chercher et afficher les points de recyclage autour de vous";
+				INFOPLIST_FILE = MapTrash/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette application a besoin de votre position pour afficher les points de recyclage autour de vous.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
