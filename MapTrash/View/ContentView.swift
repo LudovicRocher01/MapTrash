@@ -11,6 +11,8 @@ import MapKit
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @StateObject private var containerLoader = ContainerLoader()
+    @State private var showingInfo: Bool = false
+
 
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
@@ -19,7 +21,7 @@ struct ContentView: View {
         )
     )
 
-    @State private var selectedContainer: Container? // 🔹 Conteneur sélectionné
+    @State private var selectedContainer: Container?
 
     var filteredContainers: [Container] {
         containerLoader.containers.filter { containerLoader.selectedTypes.contains($0.type) }
@@ -47,6 +49,28 @@ struct ContentView: View {
 
             VStack {
                 HStack {
+                    Button(action: { showingInfo = true }) {
+                        Image(systemName: "info.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .padding()
+                            .background(Color.white.opacity(0.9))
+                            .clipShape(Circle())
+                            .shadow(radius: 4)
+                    }
+                    .padding(.top, 50)
+                    .padding(.leading, 20)
+
+                    Spacer()
+                }
+                Spacer()
+            }
+            .sheet(isPresented: $showingInfo) {
+                WasteInfoView()
+            }
+            
+            VStack {
+                HStack {
                     Spacer()
                     Button(action: {
                         if let userLocation = locationManager.userLocation {
@@ -71,7 +95,6 @@ struct ContentView: View {
                 }
                 Spacer()
 
-                // 🔹 Affichage des détails du conteneur sélectionné
                 if let container = selectedContainer {
                     VStack(spacing: 12) {
                         HStack {
@@ -110,6 +133,13 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
+                        
+                        Text("💡 \(container.getRecyclingTip())")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 4)
+
                     }
                     .transition(.opacity)
                     .animation(.easeInOut, value: selectedContainer?.id)
@@ -123,7 +153,7 @@ struct ContentView: View {
 
 
                 VStack(spacing: 10) {
-                    Text("Filtres des conteneurs")
+                    Text("Filtre des conteneurs")
                         .font(.headline)
                         .padding(.top, 5)
 
@@ -157,12 +187,10 @@ struct ContentView: View {
 func openMaps(from userLocation: CLLocationCoordinate2D?, to destination: CLLocationCoordinate2D) {
     guard let userLocation = userLocation else { return }
 
-    // ✅ Ouvre Google Maps directement si l'app est disponible
     if let url = URL(string: "comgooglemaps://?saddr=\(userLocation.latitude),\(userLocation.longitude)&daddr=\(destination.latitude),\(destination.longitude)&directionsmode=walking"),
        UIApplication.shared.canOpenURL(url) {
         UIApplication.shared.open(url)
     } else {
-        // 🔁 Fallback vers Google Maps sur le navigateur
         if let webURL = URL(string: "https://www.google.com/maps/dir/?api=1&origin=\(userLocation.latitude),\(userLocation.longitude)&destination=\(destination.latitude),\(destination.longitude)&travelmode=walking") {
             UIApplication.shared.open(webURL)
         }
@@ -170,7 +198,6 @@ func openMaps(from userLocation: CLLocationCoordinate2D?, to destination: CLLoca
 }
 
 
-// 📌 Boutons de filtre mis à jour
 struct FilterButton: View {
     let type: String
     let color: Color

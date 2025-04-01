@@ -51,4 +51,22 @@ struct Container: Identifiable {
             return .gray
         }
     }
+    
+    func getRecyclingTip() -> String {
+        switch type.uppercased() {
+        case "VERRE":
+            return "Déposez vos bouteilles, pots et bocaux en vrac, bien vidés, sans bouchon et sans prélavage."
+        case "TEXTILE":
+            return "Déposez vêtements, chaussures liées par paire, sacs et linge propre et sec dans des sacs fermés."
+        case "EMBALLAGES MENAGERS":
+            return "Tous les emballages vidés (non lavés) sont acceptés : plastique, carton, métal, briques."
+        case "ORDURES MENAGERES":
+            return "Déchets non recyclables : restes alimentaires, plastiques souillés, etc."
+        case "PAPIER":
+            return "Déposez journaux, magazines, enveloppes et cahiers sans film plastique."
+        default:
+            return "Merci de trier vos déchets selon les consignes locales."
+        }
+    }
+
 }

@@ -10,7 +10,7 @@ import CoreLocation
 
 class ContainerLoader: ObservableObject {
     @Published var containers: [Container] = []
-    @Published var selectedTypes: Set<String> = ["VERRE"]
+    @Published var selectedTypes: Set<String> = []
 
     init() {
         loadJSON()
