@@ -15,7 +15,6 @@ struct InfoTile: Identifiable {
     let color: Color
 }
 
-
 struct WasteInfoView: View {
     @Environment(\.presentationMode) var presentationMode
 
@@ -35,7 +34,7 @@ struct WasteInfoView: View {
             VStack(spacing: 20) {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(tiles) { tile in
-                        NavigationLink(destination: Text(tile.title).font(.largeTitle)) {
+                        NavigationLink(destination: destinationView(for: tile)) {
                             VStack {
                                 Image(systemName: tile.icon)
                                     .font(.system(size: 40))
@@ -57,11 +56,35 @@ struct WasteInfoView: View {
             }
             .padding()
             .navigationTitle("Guide du tri ♻️")
-            .navigationBarItems(leading: Button(action: { presentationMode.wrappedValue.dismiss() }) {
+            .navigationBarItems(leading: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.blue)
                     .imageScale(.large)
             })
+        }
+    }
+
+    @ViewBuilder
+    func destinationView(for tile: InfoTile) -> some View {
+        switch tile.title {
+        case "Verre":
+            GlassInfoView()
+        case "Textile":
+            TextileInfoView()
+        case "Emballages":
+            PackagingInfoView()
+        case "Ordures":
+            HouseholdInfoView()
+        case "Papier":
+            PaperInfoView()
+        case "Bonnes pratiques":
+            BestPracticesInfoView()
+        default:
+            Text(tile.title)
+                .font(.largeTitle)
+                .padding()
         }
     }
 }

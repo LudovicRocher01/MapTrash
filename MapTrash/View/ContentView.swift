@@ -12,26 +12,26 @@ struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @StateObject private var containerLoader = ContainerLoader()
     @State private var showingInfo: Bool = false
-
-
+    
+    
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 43.7102, longitude: 7.2620),
             span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         )
     )
-
+    
     @State private var selectedContainer: Container?
-
+    
     var filteredContainers: [Container] {
         containerLoader.containers.filter { containerLoader.selectedTypes.contains($0.type) }
     }
-
+    
     var body: some View {
         ZStack {
             Map(position: $cameraPosition) {
                 UserAnnotation()
-
+                
                 ForEach(filteredContainers) { container in
                     Annotation("", coordinate: container.coordinate) {
                         Button(action: {
@@ -46,7 +46,7 @@ struct ContentView: View {
                 }
             }
             .ignoresSafeArea()
-
+            
             VStack {
                 HStack {
                     Button(action: { showingInfo = true }) {
@@ -60,7 +60,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 50)
                     .padding(.leading, 20)
-
+                    
                     Spacer()
                 }
                 Spacer()
@@ -94,7 +94,7 @@ struct ContentView: View {
                     .padding(.trailing, 20)
                 }
                 Spacer()
-
+                
                 if let container = selectedContainer {
                     VStack(spacing: 12) {
                         HStack {
@@ -109,16 +109,16 @@ struct ContentView: View {
                                     .font(.title2)
                             }
                         }
-
+                        
                         Divider()
-
+                        
                         HStack {
                             Label(container.type.capitalized, systemImage: "trash.fill")
                                 .font(.subheadline)
                                 .foregroundColor(container.getColor())
                             Spacer()
                         }
-
+                        
                         Button(action: {
                             openMaps(from: locationManager.userLocation, to: container.coordinate)
                         }) {
@@ -139,7 +139,7 @@ struct ContentView: View {
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
                             .padding(.top, 4)
-
+                        
                     }
                     .transition(.opacity)
                     .animation(.easeInOut, value: selectedContainer?.id)
@@ -150,13 +150,13 @@ struct ContentView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 25)
                 }
-
-
+                
+                
                 VStack(spacing: 10) {
                     Text("Filtre des conteneurs")
                         .font(.headline)
                         .padding(.top, 5)
-
+                    
                     HStack {
                         FilterButton(type: "VERRE", color: .green, containerLoader: containerLoader)
                         FilterButton(type: "TEXTILE", color: .blue, containerLoader: containerLoader)
@@ -164,7 +164,7 @@ struct ContentView: View {
                         FilterButton(type: "ORDURES MENAGERES", color: .red, containerLoader: containerLoader)
                         FilterButton(type: "PAPIER", color: .orange, containerLoader: containerLoader)
                     }
-
+                    
                     HStack {
                         Text("Verre").foregroundColor(.green)
                         Text("Textile").foregroundColor(.blue)
@@ -179,6 +179,16 @@ struct ContentView: View {
                 .background(Color.white.opacity(0.9))
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .padding(.bottom, 20)
+            }
+        }
+        .onChange(of: locationManager.userLocation?.latitude) {
+            if let location = locationManager.userLocation {
+                cameraPosition = .region(
+                    MKCoordinateRegion(
+                        center: location,
+                        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                    )
+                )
             }
         }
     }
