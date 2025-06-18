@@ -24,12 +24,12 @@ class ContainerLoader: ObservableObject {
             }
 
             do {
-                let data = try Data(contentsOf: url)
+                let data = try Data(contentsOf: url, options: .mappedIfSafe)
                 let decodedData = try JSONDecoder().decode(ContainerData.self, from: data)
 
                 let processedContainers = decodedData.features.compactMap { feature -> Container? in
                     guard feature.geometry.coordinates.count == 2 else { return nil }
-                    
+
                     let coordinate = CLLocationCoordinate2D(
                         latitude: feature.geometry.coordinates[1],
                         longitude: feature.geometry.coordinates[0]
@@ -49,6 +49,7 @@ class ContainerLoader: ObservableObject {
             }
         }
     }
+
 
     func toggleType(_ type: String) {
         if selectedTypes.contains(type) {
