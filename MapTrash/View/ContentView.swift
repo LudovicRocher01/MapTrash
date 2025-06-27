@@ -25,7 +25,7 @@ struct ContentView: View {
     private let typeNames: [String: String] = [
         "VERRE":    "Verre",
         "TEXTILE":  "Textile",
-        "EMBALLAGES MENAGERS": "Emballages\nMénagèrs",
+        "EMBALLAGES MENAGERS": "Emballages\nMénagers",
         "ORDURES MENAGERES":    "Ordures\nMénagères",
         "PAPIER":   "Papier"
     ]
@@ -59,12 +59,18 @@ struct ContentView: View {
             .filter { containerLoader.selectedTypes.contains($0.type) }
     }
 
+    var visibleContainers: [Container] {
+        filteredContainers.filter { container in
+            guard let region = visibleRegion else { return false }
+            return region.contains(container.coordinate)
+        }
+    }
+
     var body: some View {
         ZStack {
             Map(position: $cameraPosition) {
                 UserAnnotation()
-                ForEach(filteredContainers) { container in
-                    Annotation("", coordinate: container.coordinate) {
+                ForEach(visibleContainers) { container in                    Annotation("", coordinate: container.coordinate) {
                         Button {
                             selectedContainer = container
                         } label: {
@@ -76,6 +82,9 @@ struct ContentView: View {
                     }
 
                 }
+            }
+            .onMapCameraChange { context in
+                visibleRegion = context.region
             }
             .ignoresSafeArea()
 
@@ -108,7 +117,7 @@ struct ContentView: View {
                             cameraPosition = .region(
                                 MKCoordinateRegion(
                                     center: loc,
-                                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                                    span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
                                 )
                             )
                         }
@@ -255,5 +264,21 @@ struct FilterButton: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+extension MKCoordinateRegion {
+    func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        let latDelta = span.latitudeDelta / 2.0
+        let lonDelta = span.longitudeDelta / 2.0
+        
+        let latMin = center.latitude - latDelta
+        let latMax = center.latitude + latDelta
+        let lonMin = center.longitude - lonDelta
+        let lonMax = center.longitude + lonDelta
+        
+        return coordinate.latitude >= latMin &&
+               coordinate.latitude <= latMax &&
+               coordinate.longitude >= lonMin &&
+               coordinate.longitude <= lonMax
     }
 }

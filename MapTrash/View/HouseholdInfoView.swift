@@ -54,14 +54,14 @@ struct HouseholdInfoView: View {
 
     private var acceptedWasteSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("✅ Ce que vous pouvez jeter", systemImage: "checkmark.circle.fill")
+            Label("Ce que vous pouvez jeter", systemImage: "checkmark.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.green)
             
             VStack(alignment: .leading, spacing: 8) {
                 itemRow(icon: "takeoutbag.and.cup.and.straw.fill", text: "Déchets alimentaires non compostés (restes de viande, poisson, produits laitiers...)")
                 itemRow(icon: "sparkles.rectangle.stack.fill", text: "Emballages sales ou gras (cartons de pizza très souillés)")
-                itemRow(icon: "tissue.fill", text: "Papiers et mouchoirs sales, couches, protections hygiéniques")
+                itemRow(icon: "toilet.fill", text: "Papiers et mouchoirs sales, couches, protections hygiéniques")
                 itemRow(icon: "trash.slash.fill", text: "Petits déchets non recyclables (polystyrène, barquettes souillées, films alimentaires)")
                 itemRow(icon: "shippingbox.and.arrow.backward.fill", text: "Petits objets en plastique cassés non recyclables")
             }
@@ -71,7 +71,7 @@ struct HouseholdInfoView: View {
 
     private var rejectedWasteSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("❌ À ne pas déposer", systemImage: "xmark.octagon.fill")
+            Label("À ne pas déposer", systemImage: "xmark.octagon.fill")
                 .font(.title2.bold())
                 .foregroundColor(.red)
 
@@ -88,7 +88,7 @@ struct HouseholdInfoView: View {
 
     private var bestPracticesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("♻️ Conseils pratiques", systemImage: "leaf.fill")
+            Label("Conseils pratiques", systemImage: "leaf.fill")
                 .font(.title2.bold())
                 .foregroundColor(.teal)
 
@@ -104,7 +104,7 @@ struct HouseholdInfoView: View {
 
     private var impactSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🌍 Impact des ordures ménagères", systemImage: "globe.europe.africa.fill")
+            Label("Impact des ordures ménagères", systemImage: "globe.europe.africa.fill")
                 .font(.title2.bold())
                 .foregroundColor(.blue)
 

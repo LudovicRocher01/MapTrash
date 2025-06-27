@@ -56,7 +56,7 @@ struct BestPracticesInfoView: View {
 
     private var reduceWasteSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("📉 Réduire ses déchets", systemImage: "arrow.down.circle.fill")
+            Label("Réduire ses déchets", systemImage: "arrow.down.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.green)
             
@@ -72,7 +72,7 @@ struct BestPracticesInfoView: View {
 
     private var reuseSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🔄 Réutiliser", systemImage: "arrow.triangle.2.circlepath.circle.fill")
+            Label("Réutiliser", systemImage: "arrow.triangle.2.circlepath.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.blue)
 
@@ -88,7 +88,7 @@ struct BestPracticesInfoView: View {
 
     private var recyclingTipsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("♻️ Conseils de recyclage", systemImage: "trash.circle.fill")
+            Label("Conseils de recyclage", systemImage: "trash.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.yellow)
 
@@ -104,7 +104,7 @@ struct BestPracticesInfoView: View {
 
     private var compostingSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🌱 Compostage", systemImage: "leaf.arrow.circlepath")
+            Label("Compostage", systemImage: "leaf.arrow.circlepath")
                 .font(.title2.bold())
                 .foregroundColor(.brown)
 
@@ -120,7 +120,7 @@ struct BestPracticesInfoView: View {
 
     private var globalImpactSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🌍 Impact positif du tri", systemImage: "globe.europe.africa.fill")
+            Label("Impact positif du tri", systemImage: "globe.europe.africa.fill")
                 .font(.title2.bold())
                 .foregroundColor(.indigo)
 

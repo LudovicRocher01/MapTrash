@@ -54,7 +54,7 @@ struct TextileInfoView: View {
 
     private var acceptedTextilesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("✅ Textiles acceptés", systemImage: "checkmark.circle.fill")
+            Label("Textiles acceptés", systemImage: "checkmark.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.green)
             
@@ -71,7 +71,7 @@ struct TextileInfoView: View {
 
     private var rejectedTextilesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("❌ À ne pas déposer", systemImage: "xmark.octagon.fill")
+            Label("À ne pas déposer", systemImage: "xmark.octagon.fill")
                 .font(.title2.bold())
                 .foregroundColor(.red)
 
@@ -87,7 +87,7 @@ struct TextileInfoView: View {
 
     private var bestPracticesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("♻️ Conseils pratiques", systemImage: "leaf.fill")
+            Label("Conseils pratiques", systemImage: "leaf.fill")
                 .font(.title2.bold())
                 .foregroundColor(.teal)
 
@@ -103,7 +103,7 @@ struct TextileInfoView: View {
 
     private var didYouKnowSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🌍 Le saviez-vous ?", systemImage: "globe.europe.africa.fill")
+            Label("Le saviez-vous ?", systemImage: "globe.europe.africa.fill")
                 .font(.title2.bold())
                 .foregroundColor(.blue)
 

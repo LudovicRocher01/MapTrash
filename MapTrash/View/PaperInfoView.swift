@@ -54,7 +54,7 @@ struct PaperInfoView: View {
 
     private var acceptedPaperSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("✅ Papiers à recycler", systemImage: "checkmark.circle.fill")
+            Label("Papiers à recycler", systemImage: "checkmark.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.green)
             
@@ -71,12 +71,12 @@ struct PaperInfoView: View {
 
     private var rejectedPaperSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("❌ À ne pas déposer", systemImage: "xmark.octagon.fill")
+            Label("À ne pas déposer", systemImage: "xmark.octagon.fill")
                 .font(.title2.bold())
                 .foregroundColor(.red)
 
             VStack(alignment: .leading, spacing: 8) {
-                itemRow(icon: "carton.fill", text: "Cartons souillés ou gras (emballages alimentaires très sales)")
+                itemRow(icon: "tray.2.fill", text: "Cartons souillés ou gras (emballages alimentaires très sales)")
                 itemRow(icon: "sparkles.rectangle.stack.fill", text: "Papier absorbant (essuie-tout, mouchoirs, lingettes)")
                 itemRow(icon: "photo.fill", text: "Photos, papiers plastifiés, papier cadeau métallisé")
                 itemRow(icon: "magazine.fill", text: "Couvertures plastifiées ou rigides de livres et cahiers")
@@ -87,7 +87,7 @@ struct PaperInfoView: View {
 
     private var bestPracticesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("♻️ Conseils pratiques", systemImage: "leaf.fill")
+            Label("Conseils pratiques", systemImage: "leaf.fill")
                 .font(.title2.bold())
                 .foregroundColor(.teal)
 
@@ -103,7 +103,7 @@ struct PaperInfoView: View {
 
     private var impactSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🌍 Le saviez-vous ?", systemImage: "globe.europe.africa.fill")
+            Label("Le saviez-vous ?", systemImage: "globe.europe.africa.fill")
                 .font(.title2.bold())
                 .foregroundColor(.blue)
 

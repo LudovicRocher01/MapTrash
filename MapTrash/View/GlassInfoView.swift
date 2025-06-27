@@ -47,12 +47,12 @@ struct GlassInfoView: View {
 
     private var acceptedGlassSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("✅ Ce que vous pouvez jeter", systemImage: "checkmark.circle.fill")
+            Label("Ce que vous pouvez jeter", systemImage: "checkmark.circle.fill")
                 .font(.title2.bold())
                 .foregroundColor(.green)
             
             VStack(alignment: .leading, spacing: 8) {
-                itemRow(icon: "bottle.fill", text: "Bouteilles en verre (vin, bière, soda, jus de fruit...)")
+                itemRow(icon: "wineglass.fill", text: "Bouteilles en verre (vin, bière, soda, jus de fruit...)")
                 itemRow(icon: "cup.and.saucer.fill", text: "Pots, bocaux alimentaires (confitures, sauces, miel...)")
                 itemRow(icon: "flask.fill", text: "Flacons cosmétiques et pharmaceutiques (parfum, huile essentielle...)")
             }
@@ -62,7 +62,7 @@ struct GlassInfoView: View {
 
     private var rejectedGlassSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("❌ À ne surtout pas déposer", systemImage: "xmark.octagon.fill")
+            Label("À ne surtout pas déposer", systemImage: "xmark.octagon.fill")
                 .font(.title2.bold())
                 .foregroundColor(.red)
 
@@ -78,7 +78,7 @@ struct GlassInfoView: View {
 
     private var bestPracticesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("♻️ Conseils pratiques", systemImage: "leaf.fill")
+            Label("Conseils pratiques", systemImage: "leaf.fill")
                 .font(.title2.bold())
                 .foregroundColor(.teal)
 
@@ -94,7 +94,7 @@ struct GlassInfoView: View {
 
     private var didYouKnowSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("🌍 Le saviez-vous ?", systemImage: "globe.europe.africa.fill")
+            Label("Le saviez-vous ?", systemImage: "globe.europe.africa.fill")
                 .font(.title2.bold())
                 .foregroundColor(.blue)
 
