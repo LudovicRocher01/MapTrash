@@ -4,3 +4,9 @@ build/
 *.xcworkspace
 *.xcuserdata/
 Pods/
+
+# macOS
+.DS_Store
+
+# Outils
+repomix-output.xml

@@ -8,277 +8,137 @@
 import SwiftUI
 import MapKit
 
+extension PresentationDetent {
+    static let compact = PresentationDetent.height(176)
+}
+
 struct ContentView: View {
-    @StateObject private var locationManager = LocationManager()
-    @StateObject private var containerLoader = ContainerLoader()
-    @State private var visibleRegion: MKCoordinateRegion?
-    @State private var showingInfo: Bool = false
+    @Environment(AppState.self) private var app
+    @Environment(LocationManager.self) private var location
+    @Environment(AppRouter.self) private var router
 
-    private let types: [String] = [
-        "VERRE",
-        "TEXTILE",
-        "EMBALLAGES MENAGERS",
-        "ORDURES MENAGERES",
-        "PAPIER"
-    ]
-    
-    private let typeNames: [String: String] = [
-        "VERRE":    "Verre",
-        "TEXTILE":  "Textile",
-        "EMBALLAGES MENAGERS": "Emballages\nMénagers",
-        "ORDURES MENAGERES":    "Ordures\nMénagères",
-        "PAPIER":   "Papier"
-    ]
+    @State private var detent: PresentationDetent = .compact
+    @State private var screenHeight: CGFloat = 800
 
-    private let typeIcons: [String: String] = [
-        "VERRE": "wineglass",
-        "TEXTILE": "tshirt",
-        "EMBALLAGES MENAGERS": "bag",
-        "ORDURES MENAGERES": "trash",
-        "PAPIER": "newspaper"
-    ]
-    private let typeColors: [String: Color] = [
-        "VERRE": .green,
-        "TEXTILE": .blue,
-        "EMBALLAGES MENAGERS": .yellow,
-        "ORDURES MENAGERES": .red,
-        "PAPIER": .orange
-    ]
-
-    @State private var cameraPosition: MapCameraPosition = .region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 43.7102, longitude: 7.2620),
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        )
-    )
-
-    @State private var selectedContainer: Container?
-
-    var filteredContainers: [Container] {
-        containerLoader.containers
-            .filter { containerLoader.selectedTypes.contains($0.type) }
-    }
-
-    var visibleContainers: [Container] {
-        filteredContainers.filter { container in
-            guard let region = visibleRegion else { return false }
-            return region.contains(container.coordinate)
+    private var sheetHeight: CGFloat {
+        switch detent {
+        case .compact: 176
+        case .large: screenHeight * 0.9
+        default: screenHeight * 0.5
         }
     }
 
     var body: some View {
-        ZStack {
-            Map(position: $cameraPosition) {
-                UserAnnotation()
-                ForEach(visibleContainers) { container in                    Annotation("", coordinate: container.coordinate) {
-                        Button {
-                            selectedContainer = container
-                        } label: {
-                            Circle()
-                                .fill(container.getColor())
-                                .frame(width: 14, height: 14)
-                                .overlay(Circle().stroke(Color.black.opacity(0.5), lineWidth: 1))
-                        }
-                    }
-
+        ZStack(alignment: .topTrailing) {
+            ClusteredMapView(
+                containers: app.containers,
+                centers: app.centers,
+                enabledTypes: app.enabledTypes,
+                showCenters: app.showCenters,
+                selection: app.selection,
+                route: app.route,
+                cameraCommand: app.cameraCommand,
+                bottomInset: min(sheetHeight, screenHeight * 0.5),
+                onSelect: { selection in
+                    withAnimation(.snappy) { app.selection = selection }
                 }
-            }
-            .onMapCameraChange { context in
-                visibleRegion = context.region
-            }
+            )
             .ignoresSafeArea()
 
-            VStack {
-                HStack {
-                    Button { showingInfo = true } label: {
-                        Image(systemName: "info.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .padding()
-                            .background(Color.white.opacity(0.9))
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
-                    }
-                    .padding(.top, 50)
-                    .padding(.leading, 20)
-                    Spacer()
-                }
-                Spacer()
-            }
-            .sheet(isPresented: $showingInfo) {
-                WasteInfoView()
-            }
-
-            VStack {
-                HStack {
-                    Spacer()
-                    Button {
-                        if let loc = locationManager.userLocation {
-                            cameraPosition = .region(
-                                MKCoordinateRegion(
-                                    center: loc,
-                                    span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
-                                )
-                            )
-                        }
-                    } label: {
-                        Image(systemName: "location.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .padding()
-                            .background(Color.white.opacity(0.8))
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
-                    }
-                    .padding(.top, 50)
-                    .padding(.trailing, 20)
-                }
-                Spacer()
-
-                if let container = selectedContainer {
-                    VStack(spacing: 12) {
-                        HStack {
-                            Text("Conteneur").font(.title3).bold()
-                            Spacer()
-                            Button { selectedContainer = nil } label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.gray)
-                                    .font(.title2)
-                            }
-                        }
-
-                        Divider()
-
-                        HStack {
-                            Label(container.type.capitalized, systemImage: "trash.fill")
-                                .font(.subheadline)
-                                .foregroundColor(container.getColor())
-                            Spacer()
-                        }
-
-                        Button {
-                            openMaps(from: locationManager.userLocation, to: container.coordinate)
-                        } label: {
-                            HStack {
-                                Image(systemName: "location.fill")
-                                Text("Y aller").fontWeight(.semibold)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-
-                        Text("💡 \(container.getRecyclingTip())")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 4)
-                    }
-                    .transition(.opacity)
-                    .animation(.easeInOut, value: selectedContainer?.id)
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(20)
-                    .shadow(radius: 10)
-                    .padding(.horizontal)
-                    .padding(.bottom, 25)
-                }
-
-                VStack(spacing: 10) {
-                    Text("Filtre des conteneurs")
-                        .font(.headline)
-                        .padding(.top, 5)
-
-                    HStack {
-                        ForEach(types, id: \.self) { type in
-                            FilterButton(
-                                type: type,
-                                icon: typeIcons[type] ?? "circle",
-                                color: typeColors[type] ?? .gray,
-                                containerLoader: containerLoader
-                            )
-                        }
-                    }
-
-                    HStack {
-                        ForEach(types, id: \.self) { type in
-                            Text(typeNames[type] ?? type.capitalized)
-                                .foregroundColor(typeColors[type] ?? .gray)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(2)
-                        }
-                    }
-                    .font(.caption)
-                    .padding(.top, 5)
-
-                }
-                .padding()
-                .background(Color.white.opacity(0.9))
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .padding(.bottom, 20)
+            mapControls
+        }
+        .overlay(alignment: .top) {
+            if !app.isLoaded {
+                ProgressView("Chargement des conteneurs…")
+                    .padding(.horizontal, 16).padding(.vertical, 10)
+                    .glassPanel(cornerRadius: 16)
+                    .padding(.top, 8)
             }
         }
-    }
-}
-
-func openMaps(from userLocation: CLLocationCoordinate2D?, to destination: CLLocationCoordinate2D) {
-    guard let userLocation = userLocation else { return }
-    let saddr = "\(userLocation.latitude),\(userLocation.longitude)"
-    let daddr = "\(destination.latitude),\(destination.longitude)"
-
-    if let url = URL(string: "comgooglemaps://?saddr=\(saddr)&daddr=\(daddr)&directionsmode=walking"),
-       UIApplication.shared.canOpenURL(url) {
-        UIApplication.shared.open(url)
-    } else if let webURL = URL(string: "https://www.google.com/maps/dir/?api=1&origin=\(saddr)&destination=\(daddr)&travelmode=walking") {
-        UIApplication.shared.open(webURL)
-    }
-}
-
-struct FilterButton: View {
-    let type: String
-    let icon: String
-    let color: Color
-    @ObservedObject var containerLoader: ContainerLoader
-
-    var body: some View {
-        Button {
-            containerLoader.toggleType(type)
-        } label: {
-            Image(systemName: icon)
-                .font(.headline)
-                .frame(width: 40, height: 40)
-                .background(
-                    containerLoader.selectedTypes.contains(type)
-                        ? color.opacity(0.8)
-                        : Color.gray.opacity(0.3)
-                )
-                .clipShape(Circle())
-                .foregroundColor(.white)
-                .overlay(Circle().stroke(color, lineWidth: 2))
+        .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { screenHeight = $0 }
+        .sheet(isPresented: .constant(true)) {
+            BottomSheet(detent: $detent)
+                .presentationDetents([.compact, .medium, .large], selection: $detent)
+                .presentationBackgroundInteraction(.enabled(upThrough: .medium))
+                .presentationDragIndicator(.visible)
+                .interactiveDismissDisabled()
+        }
+        .sensoryFeedback(.selection, trigger: app.selection)
+        .task {
+            location.start()
+            await app.load()
+            #if DEBUG
+            // Tests : xcrun simctl launch <device> <bundle> -debugURL "maptrash://nearest?type=VERRE"
+            if let debugURL = UserDefaults.standard.string(forKey: "debugURL"), let url = URL(string: debugURL) {
+                try? await Task.sleep(for: .seconds(2))
+                router.handle(url)
+            }
+            if UserDefaults.standard.bool(forKey: "debugCenter"), let c = app.nearestCenter(from: location.location) {
+                app.select(.center(c))
+            }
+            #endif
+            handlePendingRoute()
+        }
+        .onChange(of: router.pending) { handlePendingRoute() }
+        .onChange(of: location.location) { old, new in
+            // Premier point GPS : on centre la carte sur l'utilisateur.
+            if old == nil, let new, app.selection == nil {
+                app.cameraCommand = CameraCommand(kind: .focus(new.coordinate, span: 0.012))
+            }
+        }
+        .onChange(of: app.selection) { _, newValue in
+            if newValue != nil, detent == .compact { detent = .medium }
         }
     }
+
+    // MARK: Boutons flottants
+
+    private var mapControls: some View {
+        GlassGroup {
+            VStack(spacing: 10) {
+                Button {
+                    if location.isAuthorized { app.centerOnUser() } else { location.start() }
+                } label: {
+                    Image(systemName: location.isAuthorized ? "location.fill" : "location.slash")
+                        .font(.system(size: 18, weight: .semibold))
+                        .glassCircle()
+                }
+                .accessibilityLabel("Centrer sur ma position")
+
+                Button {
+                    withAnimation(.snappy) { app.showCenters.toggle() }
+                } label: {
+                    Image(systemName: "building.2.fill")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(app.showCenters ? Color.brown : Color.secondary)
+                        .glassCircle()
+                }
+                .accessibilityLabel(app.showCenters ? "Masquer les déchetteries" : "Afficher les déchetteries")
+            }
+        }
+        .tint(.primary)
+        .padding(.trailing, 14)
+        .padding(.top, 8)
+    }
+
+    // MARK: Siri / widget
+
+    private func handlePendingRoute() {
+        guard app.isLoaded, let pending = router.pending else { return }
+        router.pending = nil
+        switch pending {
+        case .nearest(let type):
+            app.selectNearest(type, from: location.location, withRoute: location.location != nil)
+        case .container(let id):
+            if let c = app.containers.first(where: { $0.id == id }) { app.select(.container(c)) }
+        }
+        detent = .medium
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-extension MKCoordinateRegion {
-    func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
-        let latDelta = span.latitudeDelta / 2.0
-        let lonDelta = span.longitudeDelta / 2.0
-        
-        let latMin = center.latitude - latDelta
-        let latMax = center.latitude + latDelta
-        let lonMin = center.longitude - lonDelta
-        let lonMax = center.longitude + lonDelta
-        
-        return coordinate.latitude >= latMin &&
-               coordinate.latitude <= latMax &&
-               coordinate.longitude >= lonMin &&
-               coordinate.longitude <= lonMax
-    }
+#Preview {
+    ContentView()
+        .environment(AppState())
+        .environment(LocationManager())
+        .environment(AppRouter.shared)
 }

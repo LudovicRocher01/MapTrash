@@ -1,0 +1,422 @@
+[
+  {
+    "nom": "Déchetterie - Cagnes-sur-Mer",
+    "adresse": "12-22 Rte de Vence, 06800 Cagnes-sur-Mer",
+    "telephone": "04 97 13 59 01",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.6726479,
+      "longitude": 7.1433843
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Carros",
+    "adresse": "2622 Route de la ZA de la Grave, 06510 Carros",
+    "telephone": "04 89 98 20 92",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.7839336,
+      "longitude": 7.2088432
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Castagniers",
+    "adresse": "Chemin du Linguador, 06670 Castagniers",
+    "telephone": "04 97 13 53 06",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.785227,
+      "longitude": 7.230914
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - La Gaude",
+    "adresse": "Route de Saint Laurent du Var, 06610 La Gaude",
+    "telephone": "04 93 24 98 53",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.735772,
+      "longitude": 7.15116
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Isola",
+    "adresse": "Quartier Trérious, 06420 Isola",
+    "telephone": "04 93 02 19 59",
+    "horaires": "Du mardi au samedi de 8h à 12h et de 14h à 17h. Fermé le dimanche et le lundi, ainsi que les jours fériés.",
+    "location": {
+      "latitude": 44.187898,
+      "longitude": 7.021233
+    },
+    "ouverture": [
+      {
+        "jours": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:00",
+            "12:00"
+          ],
+          [
+            "14:00",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Levens",
+    "adresse": "877, route de Duranus, 06670 Levens",
+    "telephone": "04 93 79 80 00 / 04 89 98 19 64",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.863496,
+      "longitude": 7.2274914
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Nice Est",
+    "adresse": "Boulevard Jean Baptiste Verany, 06300 Nice",
+    "telephone": "04 89 98 23 77",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Accès limité aux véhicules de moins de 2m.",
+    "location": {
+      "latitude": 43.716953,
+      "longitude": 7.282761
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Nice Nord",
+    "adresse": "Boulevard Jean Behra, 06100 Nice",
+    "telephone": "04 89 98 23 99",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Réservée aux véhicules de type VL.",
+    "location": {
+      "latitude": 43.728186,
+      "longitude": 7.244744
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Nice Ouest",
+    "adresse": "319 Avenue Sainte-Marguerite, 06200 Nice",
+    "telephone": "04 89 98 23 88",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Accès limité aux véhicules de moins de 2m.",
+    "location": {
+      "latitude": 43.6940641,
+      "longitude": 7.1997741
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Saint-Martin-Vésubie",
+    "adresse": "Quartier les Châtaigniers, 06450 Saint-Martin de Vésubie",
+    "telephone": "04 93 02 88 06",
+    "horaires": "Mardi de 13h à 18h. Mercredi, jeudi, vendredi, samedi et dimanche de 12h à 18h. Fermé le lundi et les jours fériés.",
+    "location": {
+      "latitude": 44.0454297,
+      "longitude": 7.277155
+    },
+    "ouverture": [
+      {
+        "jours": [
+          2
+        ],
+        "plages": [
+          [
+            "13:00",
+            "18:00"
+          ]
+        ]
+      },
+      {
+        "jours": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "plages": [
+          [
+            "12:00",
+            "18:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - La Trinité",
+    "adresse": "Boulevard Fuon Santa, 06340 La Trinité",
+    "telephone": "04 97 13 53 04",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.740785,
+      "longitude": 7.323677
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Valdeblore",
+    "adresse": "La Roche, 06420 Valdeblore",
+    "telephone": "04 93 03 36 60",
+    "horaires": "Lundi, mardi, mercredi, vendredi et samedi de 8h à 12h et de 14h à 17h. Fermé le jeudi, le dimanche et les jours fériés.",
+    "location": {
+      "latitude": 44.0700915,
+      "longitude": 7.1755303
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:00",
+            "12:00"
+          ],
+          [
+            "14:00",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "Déchetterie - Vence",
+    "adresse": "Route de Saint-Paul, 06140 Vence",
+    "telephone": "04 93 58 66 37",
+    "horaires": "Du lundi au samedi de 8h30 à 12h et de 13h30 à 17h. Fermé les dimanches et jours fériés.",
+    "location": {
+      "latitude": 43.715502,
+      "longitude": 7.116495
+    },
+    "ouverture": [
+      {
+        "jours": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "plages": [
+          [
+            "08:30",
+            "12:00"
+          ],
+          [
+            "13:30",
+            "17:00"
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -6,11 +6,47 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8AB100122EC0000100A1B2C3 /* MapTrashWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8AB100012EC0000100A1B2C3 /* MapTrashWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8AB100132EC0000100A1B2C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A89BFBC2D89C6D1000F445E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AB100042EC0000100A1B2C3;
+			remoteInfo = MapTrashWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8AB100112EC0000100A1B2C3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8AB100122EC0000100A1B2C3 /* MapTrashWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8A89BFC42D89C6D1000F445E /* MapTrash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTrash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AB100012EC0000100A1B2C3 /* MapTrashWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MapTrashWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8AB100032EC0000100A1B2C3 /* Exceptions for "MapTrashWidget" folder in "MapTrashWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8AB100042EC0000100A1B2C3 /* MapTrashWidgetExtension */;
+		};
 		8AF003272D90E18100843CD0 /* Exceptions for "MapTrash" folder in "MapTrash" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -29,10 +65,30 @@
 			path = MapTrash;
 			sourceTree = "<group>";
 		};
+		8AB000012EC0000100A1B2C3 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		8AB100022EC0000100A1B2C3 /* MapTrashWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8AB100032EC0000100A1B2C3 /* Exceptions for "MapTrashWidget" folder in "MapTrashWidgetExtension" target */,
+			);
+			path = MapTrashWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8A89BFC12D89C6D1000F445E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AB100062EC0000100A1B2C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				8A89BFC62D89C6D1000F445E /* MapTrash */,
+				8AB000012EC0000100A1B2C3 /* Shared */,
+				8AB100022EC0000100A1B2C3 /* MapTrashWidget */,
 				8A89BFC52D89C6D1000F445E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				8A89BFC42D89C6D1000F445E /* MapTrash.app */,
+				8AB100012EC0000100A1B2C3 /* MapTrashWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,13 +127,16 @@
 				8A89BFC02D89C6D1000F445E /* Sources */,
 				8A89BFC12D89C6D1000F445E /* Frameworks */,
 				8A89BFC22D89C6D1000F445E /* Resources */,
+				8AB100112EC0000100A1B2C3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8AB100142EC0000100A1B2C3 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8A89BFC62D89C6D1000F445E /* MapTrash */,
+				8AB000012EC0000100A1B2C3 /* Shared */,
 			);
 			name = MapTrash;
 			packageProductDependencies = (
@@ -82,6 +144,29 @@
 			productName = MapTrash;
 			productReference = 8A89BFC42D89C6D1000F445E /* MapTrash.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8AB100042EC0000100A1B2C3 /* MapTrashWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AB100082EC0000100A1B2C3 /* Build configuration list for PBXNativeTarget "MapTrashWidgetExtension" */;
+			buildPhases = (
+				8AB100052EC0000100A1B2C3 /* Sources */,
+				8AB100062EC0000100A1B2C3 /* Frameworks */,
+				8AB100072EC0000100A1B2C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8AB000012EC0000100A1B2C3 /* Shared */,
+				8AB100022EC0000100A1B2C3 /* MapTrashWidget */,
+			);
+			name = MapTrashWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = MapTrashWidgetExtension;
+			productReference = 8AB100012EC0000100A1B2C3 /* MapTrashWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -96,12 +181,16 @@
 					8A89BFC32D89C6D1000F445E = {
 						CreatedOnToolsVersion = 16.2;
 					};
+					8AB100042EC0000100A1B2C3 = {
+						CreatedOnToolsVersion = 26.4;
+					};
 				};
 			};
 			buildConfigurationList = 8A89BFBF2D89C6D1000F445E /* Build configuration list for PBXProject "MapTrash" */;
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				fr,
 				en,
 				Base,
 			);
@@ -113,12 +202,20 @@
 			projectRoot = "";
 			targets = (
 				8A89BFC32D89C6D1000F445E /* MapTrash */,
+				8AB100042EC0000100A1B2C3 /* MapTrashWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8A89BFC22D89C6D1000F445E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AB100072EC0000100A1B2C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +232,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8AB100052EC0000100A1B2C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8AB100142EC0000100A1B2C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8AB100042EC0000100A1B2C3 /* MapTrashWidgetExtension */;
+			targetProxy = 8AB100132EC0000100A1B2C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8A89BFD02D89C6D3000F445E /* Debug */ = {
@@ -281,7 +393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ludovicrocher.MapTrash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -314,9 +426,63 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ludovicrocher.MapTrash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8AB100092EC0000100A1B2C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96WJWVZ5ZV;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MapTrashWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Tri Nice";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Le widget utilise votre position pour afficher le conteneur le plus proche.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ludovicrocher.MapTrash.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8AB100102EC0000100A1B2C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96WJWVZ5ZV;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MapTrashWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Tri Nice";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Le widget utilise votre position pour afficher le conteneur le plus proche.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ludovicrocher.MapTrash.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -340,6 +506,15 @@
 			buildConfigurations = (
 				8A89BFD32D89C6D3000F445E /* Debug */,
 				8A89BFD42D89C6D3000F445E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AB100082EC0000100A1B2C3 /* Build configuration list for PBXNativeTarget "MapTrashWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AB100092EC0000100A1B2C3 /* Debug */,
+				8AB100102EC0000100A1B2C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
